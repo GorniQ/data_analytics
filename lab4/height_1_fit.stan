@@ -1,6 +1,6 @@
 data {
   int<lower=0> N;
-  real heights[N];
+  real<lower=0> heights[N];
 }
 
 parameters {
@@ -9,14 +9,12 @@ parameters {
 }
 
 model {
-  mi ~ normal(170, 10);
-  sigma ~ gamma(2, 30);
-  
+  mi ~ normal(154, 10);
+  sigma ~ gamma(1, 15);
   heights ~ normal(mi, sigma);
 }
 
 generated quantities {
-  real height_sim = normal_rng(mi, sigma);
+   real<lower=0> height_sim = normal_rng(mi, sigma);
 }
-
 
