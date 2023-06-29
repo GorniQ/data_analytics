@@ -22,3 +22,10 @@ model {
   // Likelihood
   y ~ normal(alpha + beta1 * x1 + beta2 * x2, sigma);
 }
+
+generated quantities {
+  vector[N] y_generated;
+  for (i in 1:N) {
+    y_generated[i] = fabs(normal_rng(alpha + beta1 * x1[i] + beta2 * x2[i], sigma));
+  }
+}
